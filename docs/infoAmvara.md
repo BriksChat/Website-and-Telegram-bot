@@ -126,6 +126,16 @@ mysql+pymysql://USER:PASSWORD@HOST:3306/DATABASE?charset=utf8mb4
 
 Настоящий `DATABASE_URL` нельзя добавлять в `.env.example`, README, папку `docs` или GitHub.
 
+16. Перейдите в раздел **Конфигурация** и проверьте настройки:
+
+    - **Окружение** — `Docker`;
+    - **Инструмент** — `Docker`;
+    - **Dockerfile** — `Dockerfile`;
+    - **Порт** — `5000`;
+    - **persistenceMount** — `/data`.
+
+Если все значения указаны верно, нажмите **Завершить**.
+
 ## 6. Проверьте `amvera.yml`
 
 В корне репозитория уже есть:
