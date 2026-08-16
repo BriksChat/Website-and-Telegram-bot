@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Виртуальные окружения
+venv/
+env/
+ENV/
+.venv/
+
+# Персональные данные пользователей (КРИТИЧНО!)
+data/progress/
+data/settings/
+data/user_progress.json
+data/settings.json
+
+# Переменные окружения
+.env
+.env.local
+.env.*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Логи
+*.log
+logs/
+
+# Git
+.git/

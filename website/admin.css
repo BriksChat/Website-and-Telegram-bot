@@ -1,0 +1,100 @@
+:root {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #172033;
+  background: #f3f6fb;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; }
+button, input { font: inherit; }
+
+.admin-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 32px auto;
+}
+
+.panel {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 14px 40px rgba(31, 45, 80, .1);
+  padding: 24px;
+}
+
+.login-panel {
+  width: min(440px, 100%);
+  margin: 10vh auto 0;
+}
+
+h1 { margin: 0 0 8px; }
+p { color: #61708a; }
+label { display: block; margin-bottom: 8px; font-weight: 700; }
+
+input {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 11px 12px;
+  background: #fff;
+}
+
+input:focus {
+  outline: 3px solid rgba(52, 96, 255, .16);
+  border-color: #3460ff;
+}
+
+button {
+  border: 0;
+  border-radius: 10px;
+  padding: 11px 16px;
+  background: #3460ff;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover { filter: brightness(.96); }
+button:disabled { opacity: .45; cursor: default; }
+button.secondary { background: #e8edf7; color: #24304a; }
+button.danger { background: #d9363e; }
+
+#loginForm { display: grid; gap: 12px; }
+.toolbar { display: flex; gap: 10px; align-items: center; }
+.header-toolbar { justify-content: space-between; margin-bottom: 20px; }
+.search-toolbar { margin: 18px 0; }
+.search-toolbar input { flex: 1; }
+
+.add-form {
+  display: grid;
+  grid-template-columns: 130px 1fr 1fr auto;
+  gap: 10px;
+  padding: 16px;
+  background: #f6f8fc;
+  border-radius: 14px;
+}
+
+.message { min-height: 24px; margin: 10px 0; }
+.message.error { color: #b42318; }
+.message.success { color: #067647; }
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 12px 10px; border-bottom: 1px solid #e6ebf2; text-align: left; }
+th { background: #f7f9fc; color: #475467; font-size: 14px; }
+td input { min-width: 180px; }
+.actions { display: flex; gap: 8px; }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+@media (max-width: 780px) {
+  .admin-shell { width: min(100% - 16px, 1180px); margin: 8px auto; }
+  .panel { padding: 16px; border-radius: 14px; }
+  .add-form { grid-template-columns: 1fr; }
+  .search-toolbar { flex-wrap: wrap; }
+  .search-toolbar input { flex-basis: 100%; }
+}

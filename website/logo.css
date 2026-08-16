@@ -1,0 +1,182 @@
+/* Логотип LearEnglish и фирменная верхняя панель сайта. */
+.top-header {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 132px;
+  margin-bottom: 20px;
+  padding: 0 56px;
+}
+
+.top-header .burger-button {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  z-index: 2;
+}
+
+.top-header .header-spacer {
+  display: none;
+}
+
+.brand-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 390px);
+  min-width: 0;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.logo-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 330px);
+  padding: 2px 12px 0;
+  border-radius: 26px;
+  text-decoration: none;
+  isolation: isolate;
+  animation: logoAppear 0.6s ease-out both;
+}
+
+.logo-link::before {
+  content: "";
+  position: absolute;
+  inset: 16% 12% 10%;
+  z-index: -1;
+  border-radius: 999px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(83, 196, 255, 0.22) 0%,
+    rgba(144, 91, 255, 0.16) 52%,
+    transparent 76%
+  );
+  filter: blur(18px);
+  opacity: 0.78;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.site-logo {
+  display: block;
+  width: clamp(170px, 31vw, 300px);
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 0 9px rgba(73, 191, 255, 0.36))
+    drop-shadow(0 0 18px rgba(147, 92, 255, 0.25));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.brand-header .header-subtitle {
+  width: 100%;
+  margin: -4px 0 0;
+  padding: 7px 14px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.74);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.52);
+  box-shadow: 0 8px 24px rgba(86, 98, 154, 0.08);
+  color: #858ca3;
+  font-size: 0.88rem;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.logo-link:hover .site-logo,
+.logo-link:focus-visible .site-logo {
+  transform: translateY(-2px) scale(1.025);
+  filter:
+    drop-shadow(0 0 12px rgba(73, 191, 255, 0.52))
+    drop-shadow(0 0 24px rgba(147, 92, 255, 0.38));
+}
+
+.logo-link:hover::before,
+.logo-link:focus-visible::before {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+.logo-link:focus-visible {
+  outline: 3px solid rgba(102, 126, 234, 0.35);
+  outline-offset: 4px;
+}
+
+@keyframes logoAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.97);
+    filter: brightness(1.12);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: brightness(1);
+  }
+}
+
+@media (max-width: 480px) {
+  .top-header {
+    min-height: 116px;
+    padding: 0 46px;
+  }
+
+  .top-header .burger-button {
+    top: 4px;
+  }
+
+  .brand-header {
+    width: min(100%, 300px);
+  }
+
+  .logo-link {
+    width: min(100%, 250px);
+    padding-inline: 4px;
+  }
+
+  .site-logo {
+    width: clamp(150px, 52vw, 220px);
+  }
+
+  .brand-header .header-subtitle {
+    margin-top: -2px;
+    padding: 6px 10px 7px;
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .top-header {
+    min-height: 106px;
+    padding: 0 42px;
+  }
+
+  .logo-link {
+    width: min(100%, 210px);
+  }
+
+  .site-logo {
+    width: clamp(138px, 50vw, 190px);
+  }
+
+  .brand-header .header-subtitle {
+    font-size: 0.73rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-link {
+    animation: none;
+  }
+
+  .site-logo,
+  .logo-link::before {
+    transition: none;
+  }
+}

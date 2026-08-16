@@ -1,0 +1,460 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 1.8rem;
+    color: #667eea;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Отображение Chat_ID в меню */
+.chat-id-display {
+    text-align: center;
+    color: #999;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.chat-id-display span {
+    font-weight: bold;
+    color: #667eea;
+}
+
+.screen {
+    animation: fadeIn 0.3s;
+}
+
+menu {
+  display: flex;
+  flex-direction: column;
+}
+
+menu button {
+  margin-bottom: 30px;
+}
+
+menu button:last-child {
+  margin-bottom: 0;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+.btn-primary {
+    background: #667eea;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.btn-primary:hover {
+    background: #5568d3;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: white;
+    color: #667eea;
+    border: 2px solid #667eea;
+    margin-bottom: 15px;
+}
+
+.btn-secondary:hover {
+    background: #f0f0f0;
+}
+
+.btn-back, .btn-reset {
+    background: transparent;
+    color: #666;
+    margin-top: 20px;
+}
+
+.btn-back:hover, .btn-reset:hover {
+    color: #333;
+}
+
+.nickname-display {
+    text-align: center;
+    color: #999;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.nickname-display span {
+    color: #667eea;
+    font-weight: bold;
+}
+
+.btn-small {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    width: auto;
+}
+
+.btn-small:hover {
+    background: #e0e0e0;
+}
+
+.nickname-section {
+    margin-bottom: 25px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+}
+
+.nickname-section h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.nickname-section input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.nickname-section input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.current-nickname {
+    font-size: 1.2rem;
+    color: #667eea;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    background: #f8f9ff;
+    border-radius: 8px;
+}
+
+.notice {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: #856404;
+}
+
+.saved-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.saved-nickname {
+    padding: 12px;
+    background: #f8f9ff;
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.saved-nickname:hover {
+    background: #667eea;
+    color: white;
+}
+
+.saved-nickname.active {
+    background: #667eea;
+    color: white;
+}
+
+/* Игровые стили */
+.progress {
+    text-align: center;
+    color: #999;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.matching-board {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.word-btn {
+    padding: 18px 10px;
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 14px;
+    font-size: 1rem;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.word-btn:hover:not(.matched):not(.disabled) {
+    border-color: #667eea;
+    transform: translateY(-2px);
+}
+
+.word-btn.selected {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+    transform: scale(1.03);
+}
+
+.word-btn.matched {
+    background: #4caf50;
+    color: white;
+    border-color: #4caf50;
+    cursor: default;
+    opacity: 0.6;
+    transform: scale(0.97);
+}
+
+.word-btn.wrong {
+    background: #f44336;
+    color: white;
+    border-color: #f44336;
+    animation: shake 0.4s;
+}
+
+.word-btn.disabled {
+    cursor: default;
+    pointer-events: none;
+}
+
+.feedback {
+    text-align: center;
+    min-height: 24px;
+    font-size: 0.95rem;
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.feedback.error { color: #f44336; }
+.feedback.success { color: #4caf50; }
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background: white;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.stat-item strong { color: #667eea; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+}
+
+footer {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid #eee;
+    color: #999;
+    font-size: 0.85rem;
+}
+
+footer a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+footer a:hover { text-decoration: underline; }
+
+@media (max-width: 480px) {
+    .container { padding: 15px; }
+    h1 { font-size: 1.5rem; }
+    .word-btn { padding: 14px 8px; font-size: 0.95rem; min-height: 52px; }
+    .matching-board { gap: 10px; }
+    .column { gap: 8px; }
+    button { padding: 12px 20px; font-size: 0.95rem; }
+    .stat-item { padding: 12px; }
+}
+
+/* Кнопка смены Chat_ID */
+.btn-change-id {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 2px 6px;
+    margin-left: 8px;
+    border-radius: 4px;
+    transition: background 0.2s;
+    width: auto;
+    display: inline-block;
+}
+
+.btn-change-id:hover {
+    background: #e0e0e0;
+}
+
+/* Предупреждение о ChatID */
+.chat-id-warning {
+    font-size: 0.75rem;
+    color: #999;
+    margin-top: 8px;
+    line-height: 1.4;
+}
+
+@media (max-width: 360px) {
+    h1 { font-size: 1.3rem; }
+    .word-btn { padding: 12px 6px; font-size: 0.85rem; min-height: 46px; }
+}
+
+/* Стили для экрана завершения */
+#complete p {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #666;
+    font-size: 1rem;
+}
+
+/* Скрываем элементы */
+.hidden {
+  display: none;
+}
+
+/* Экран перехода */
+.round-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(102, 126, 234, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.round-transition.hidden {
+  display: none !important;
+}
+
+.round-transition-text {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 30px;
+  animation: popIn 0.5s ease-out;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Стили для экрана "В разработке" */
+.info-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  text-align: left;
+  border-left: 4px solid #667eea;
+}
+
+.info-card h3 {
+  color: #667eea;
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.info-card p {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #444;
+}
+
+.info-card p:last-child {
+  margin-bottom: 0;
+}
+
+.info-card strong {
+  color: #333;
+}

@@ -1,0 +1,418 @@
+/*
+ * ui.css — дополнительные стили интерфейса English Learning.
+ *
+ * Отвечает за:
+ * - бургер-меню и затемнение страницы;
+ * - верхнюю панель и экран загрузки;
+ * - улучшенное оформление игрового поля;
+ * - модальное мини-обучение при первом входе.
+ *
+ * Подключается после style.css и переопределяет только интерфейсные элементы.
+ */
+
+body {
+  background: linear-gradient(180deg, #f7f8ff 0%, #f3f5fb 100%);
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+.container {
+  max-width: 620px;
+  justify-content: flex-start;
+  padding-top: 18px;
+}
+
+.top-header {
+  display: grid;
+  grid-template-columns: 48px 1fr 48px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.top-header h1 {
+  margin: 0;
+  text-align: center;
+}
+
+.header-subtitle {
+  margin-top: 2px;
+  text-align: center;
+  color: #8b91a7;
+  font-size: 0.9rem;
+}
+
+.header-spacer {
+  width: 48px;
+}
+
+.burger-button,
+.burger-close,
+.menu-icon-button,
+.learning-demo-close,
+.demo-skip {
+  width: auto;
+}
+
+.burger-button {
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: white;
+  box-shadow: 0 6px 20px rgba(79, 91, 150, 0.12);
+}
+
+.burger-button span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  border-radius: 99px;
+  background: #667eea;
+}
+
+.burger-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  width: min(330px, 86vw);
+  height: 100vh;
+  padding: 22px;
+  background: white;
+  box-shadow: 18px 0 45px rgba(30, 38, 75, 0.18);
+  transform: translateX(-105%);
+  transition: transform 0.25s ease;
+}
+
+.burger-menu.open {
+  transform: translateX(0);
+}
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1900;
+  background: rgba(19, 25, 54, 0.38);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.menu-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.burger-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+  font-size: 1.3rem;
+}
+
+.burger-close {
+  padding: 4px 10px;
+  background: transparent;
+  color: #667eea;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.burger-chat-id {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  padding: 14px;
+  border-radius: 14px;
+  background: #f5f7ff;
+  color: #7d849c;
+  font-size: 0.86rem;
+}
+
+.burger-chat-id strong {
+  color: #667eea;
+  font-size: 0.9rem;
+}
+
+.menu-icon-button {
+  padding: 4px;
+  background: transparent;
+}
+
+.burger-menu-item {
+  margin-bottom: 10px;
+  padding: 14px 16px;
+  text-align: left;
+  background: white;
+  color: #34394e;
+  border: 1px solid #e7e9f4;
+}
+
+.burger-menu-item:hover {
+  border-color: #667eea;
+  background: #f7f8ff;
+}
+
+.progress-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding: 13px 16px;
+  border-radius: 14px;
+  background: white;
+  box-shadow: 0 8px 28px rgba(79, 91, 150, 0.08);
+  color: #8a90a5;
+  font-size: 0.88rem;
+}
+
+.progress-card strong {
+  color: #667eea;
+}
+
+.matching-board {
+  gap: 12px;
+}
+
+.word-btn {
+  min-height: 66px;
+  border: 1px solid #e0e3ef;
+  box-shadow: 0 7px 22px rgba(72, 83, 132, 0.07);
+}
+
+.loading-screen {
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: #81889f;
+}
+
+.loading-screen.hidden {
+  display: none;
+}
+
+.loading-spinner {
+  width: 42px;
+  height: 42px;
+  border: 4px solid #e3e7fb;
+  border-top-color: #667eea;
+  border-radius: 50%;
+  animation: uiSpin 0.8s linear infinite;
+}
+
+@keyframes uiSpin {
+  to { transform: rotate(360deg); }
+}
+
+#complete,
+#help,
+#stats,
+#dev-info {
+  padding: 6px 0 20px;
+}
+
+#complete p {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.help-demo-button {
+  margin-top: 14px;
+  margin-bottom: 0;
+}
+
+.learning-demo {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(22, 28, 58, 0.62);
+  backdrop-filter: blur(5px);
+}
+
+.learning-demo.hidden {
+  display: none;
+}
+
+.learning-demo-card {
+  position: relative;
+  width: min(430px, 100%);
+  padding: 28px 24px 22px;
+  border-radius: 24px;
+  background: white;
+  box-shadow: 0 24px 70px rgba(21, 29, 68, 0.28);
+  animation: demoCardIn 0.32s ease-out;
+}
+
+.learning-demo-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  padding: 4px 10px;
+  background: transparent;
+  color: #8a90a5;
+  font-size: 1.8rem;
+}
+
+.learning-demo-badge {
+  width: fit-content;
+  margin: 0 auto 10px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #eef1ff;
+  color: #667eea;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.learning-demo-card h2 {
+  margin-bottom: 8px;
+}
+
+.learning-demo-text {
+  min-height: 48px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #6f768d;
+}
+
+.demo-board {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.demo-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.demo-word {
+  padding: 14px 8px;
+  border: 2px solid #e3e6f1;
+  border-radius: 14px;
+  background: white;
+  text-align: center;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.demo-word.muted {
+  color: #a2a8b9;
+  background: #f8f9fc;
+}
+
+.demo-word.demo-selected {
+  border-color: #667eea;
+  background: #667eea;
+  color: white;
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 24px rgba(102, 126, 234, 0.25);
+}
+
+.demo-word.demo-matched {
+  border-color: #4caf50;
+  background: #4caf50;
+  color: white;
+  animation: demoMatched 0.55s ease;
+}
+
+.demo-arrow {
+  color: #a1a7ba;
+  font-size: 1.4rem;
+}
+
+.demo-steps {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  margin-bottom: 16px;
+}
+
+.demo-step {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #dfe2ed;
+  transition: width 0.25s ease, background 0.25s ease;
+}
+
+.demo-step.active {
+  width: 24px;
+  border-radius: 99px;
+  background: #667eea;
+}
+
+.demo-skip {
+  display: block;
+  margin: -4px auto 0;
+  padding: 8px 12px;
+  background: transparent;
+  color: #9298aa;
+  font-size: 0.88rem;
+}
+
+@keyframes demoCardIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes demoMatched {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 14px;
+  }
+
+  .top-header {
+    grid-template-columns: 44px 1fr 44px;
+  }
+
+  .top-header h1 {
+    font-size: 1.35rem;
+  }
+
+  .header-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .progress-card {
+    font-size: 0.78rem;
+    padding: 11px 12px;
+  }
+
+  .word-btn {
+    min-height: 58px;
+  }
+
+  .learning-demo-card {
+    padding: 26px 18px 18px;
+  }
+
+  .demo-word {
+    padding: 12px 6px;
+    font-size: 0.92rem;
+  }
+}
