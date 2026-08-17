@@ -29,6 +29,23 @@ jobs:
       - name: Check Python syntax
         run: python -m compileall -q english_learning tests
 
+      - name: Check JavaScript syntax
+        run: |
+          node --check core/app.js
+          for file in website/*.js; do node --check "$file"; done
+
+      - name: Check autonomous dictionary
+        run: |
+          node <<'NODE'
+          global.window = globalThis;
+          require('./core/data/words.js');
+          const cards = window.LEARN_CARDS.filter(card => card.id !== 99);
+          const words = cards.flatMap(card => card.words);
+          if (cards.length !== 30 || words.length !== 300) {
+            throw new Error(`Expected 30 cards and 300 words, got ${cards.length} and ${words.length}`);
+          }
+          NODE
+
       - name: Run API contract tests
         run: python -m unittest discover -s tests -v
 
