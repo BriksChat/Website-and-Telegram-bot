@@ -3,11 +3,11 @@ setlocal
 cd /d "%~dp0..\english_learning"
 
 set "PYTHON_COMMAND="
-python --version
+python -c "import sys; raise SystemExit(0 if sys.version_info >= (3, 12) else 1)" >nul 2>&1
 if not errorlevel 1 set "PYTHON_COMMAND=python"
 
 if not defined PYTHON_COMMAND (
-  py -3.12 --version
+  py -3.12 -c "import sys; raise SystemExit(0 if sys.version_info >= (3, 12) else 1)" >nul 2>&1
   if not errorlevel 1 set "PYTHON_COMMAND=py -3.12"
 )
 
