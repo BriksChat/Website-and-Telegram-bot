@@ -109,6 +109,16 @@ def api_check_answer():
     else: p["total_wrong"] += 1; p["streak"] = 0; add_hard_word(chat_id, word)
     save_progress(chat_id, p); return jsonify({"correct": correct, "streak": p["streak"], "total_correct": p["total_correct"], "total_wrong": p["total_wrong"]})
 
+@app.post("/api/hard-word")
+def api_hard_word():
+    data = request.get_json(silent=True) or {}
+    chat_id = str(data.get("chat_id", "")).strip()
+    word_en = str(data.get("word_en", "")).strip()
+    if not chat_id or not word_en:
+        return jsonify({"success": False, "message": "chat_id и word_en обязательны"}), 400
+    add_hard_word(chat_id, word_en)
+    return jsonify({"success": True})
+
 @app.post("/api/complete-card")
 def api_complete_card():
     data = request.get_json(silent=True) or {}; chat_id = request.args.get("chat_id") or data.get("chat_id", "default"); p = load_progress(chat_id); current = p["current_card"]
