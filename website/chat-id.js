@@ -66,11 +66,24 @@
     window.history.replaceState({}, document.title, window.location.pathname);
   }
 
+  function configuredTelegramBotUrl() {
+    const value = String(window.TELEGRAM_BOT_URL || '').trim().replace(/\/$/, '');
+    return /^https:\/\/t\.me\/[A-Za-z0-9_]+$/.test(value) ? value : '';
+  }
+
+  const telegramMenuButton = document.getElementById('telegramMenuButton');
+  if (telegramMenuButton && !configuredTelegramBotUrl()) {
+    telegramMenuButton.hidden = true;
+  }
+
   // Сайт → бот: передаём текущий ID сайта через Telegram deep link.
   window.openTelegramBot = function openTelegramBotWithLink() {
-    const baseUrl = window.TELEGRAM_BOT_URL || 'https://t.me/YOUR_BOT_USERNAME';
-    const separator = baseUrl.includes('?') ? '&' : '?';
-    const link = `${baseUrl}${separator}start=link_${encodeURIComponent(chat_id)}`;
+    const baseUrl = configuredTelegramBotUrl();
+    if (!baseUrl) {
+      alert('Telegram-бот будет доступен после выполнения этапа 5 инструкции.');
+      return;
+    }
+    const link = `${baseUrl}?start=link_${encodeURIComponent(chat_id)}`;
     window.location.href = link;
   };
 
