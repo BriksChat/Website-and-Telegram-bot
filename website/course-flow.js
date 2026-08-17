@@ -20,8 +20,6 @@
     return originalShowScreen(screenId);
   };
 
-  window.openTelegramBot = function () { window.location.href = 'telegram.html'; };
-
   window.restartMainCourse = async function () {
     if (!confirm('Начать новый курс? Статистика завершённого курса будет сохранена в истории.')) return;
     try {
