@@ -73,7 +73,7 @@ function openStatsFromMenu() { closeBurgerMenu(); showStats(); }
 function openHelpFromMenu() { closeBurgerMenu(); showScreen('help'); }
 function openDevInfoFromMenu() { closeBurgerMenu(); showScreen('dev-info'); }
 function backToMenu() { startLearning(); }
-function openTelegramBot() { alert('Telegram-бот подключается на четвёртом этапе. Локальное ядро работает без него.'); }
+function openTelegramBot() { alert('Telegram-бот подключается на пятом этапе. Локальное ядро работает без него.'); }
 
 function localChatId() {
   let value = localStorage.getItem('learenglish-local-chat-id');
