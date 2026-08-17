@@ -1,0 +1,65 @@
+name: Validate LearEnglish
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  api-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: english_learning/requirements.txt
+
+      - name: Install dependencies
+        run: python -m pip install -r english_learning/requirements.txt
+
+      - name: Check Python syntax
+        run: python -m compileall -q english_learning tests
+
+      - name: Run API contract tests
+        run: python -m unittest discover -s tests -v
+
+  docker-start:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t learenglish-test .
+
+      - name: Start container without Telegram
+        run: >
+          docker run -d --name learenglish-test
+          -e DATABASE_URL=sqlite:////tmp/english_learning.db
+          -e ADMIN_PASSWORD=test-admin-password
+          -p 5000:5000
+          learenglish-test
+
+      - name: Wait for API health
+        run: |
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:5000/api/health | grep -q '"status":"ok"'; then
+              exit 0
+            fi
+            sleep 1
+          done
+          docker logs learenglish-test
+          exit 1
+
+      - name: Stop test container
+        if: always()
+        run: docker rm -f learenglish-test || true
